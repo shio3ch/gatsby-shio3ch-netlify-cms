@@ -1,11 +1,11 @@
 ---
 templateKey: index-page
-title: Great coffee with a conscience
-image: /img/home-jumbotron.jpg
-heading: Great coffee with a conscience
-subheading: Support sustainable farming while enjoying a cup
+title: SHIOCH.NET
+image: /img/real_kp.jpg
+heading: SHIOCH.NET
+subheading: パダワンエンジニアの独り言をもっと、届けやすく。
 mainpitch:
-  title: Why Kaldi
+  title: ヒント
   description: >
     Kaldi is the coffee store for everyone who believes that great coffee
     shouldn't just taste good, it should do good too. We source all of our beans

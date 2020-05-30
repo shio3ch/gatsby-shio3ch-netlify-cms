@@ -1,0 +1,65 @@
+@import "~bulma/sass/utilities/initial-variables";
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+
+// フォント
+$family-primary: "M PLUS Rounded 1c", sans-serif;
+
+$title-line-height: 1.5;
+
+// container variables (mobile is '<1024px')
+$desktop: 960px; // default 960px.
+$widescreen: 1152px; //default 1152px.
+$fullhd: 1152px; // default 1344px.
+
+// Navbar variables
+//$navbar-padding-horizontal: 0;
+
+.title-logo {
+  font-family: "Audiowide", cursive;
+  font-size: 1.5em;
+  color: $black;
+  letter-spacing: 0.2em;
+
+  &:hover {
+    color: $grey-darker;
+    text-shadow: 0 0 4px $grey-light;
+  }
+}
+
+.blog-roll {
+  &:hover {
+    box-shadow: 0 0 3px 2px $grey-light;
+
+    .blog-roll-title {
+      text-decoration: underline;
+    }
+  }
+}
+
+.tag-button {
+  &:hover {
+    .tag {
+      box-shadow: 0 0 0 1px $black;
+    }
+  }
+}
+
+.sns-icon {
+  svg {
+    cursor: pointer;
+    color: $black;
+
+    &:hover {
+      color: $grey-light;
+    }
+  }
+}
+
+.profile-tile-link {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@import "~bulma";

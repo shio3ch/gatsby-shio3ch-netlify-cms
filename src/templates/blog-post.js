@@ -1,16 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { kebabCase } from "lodash";
 import { Helmet } from "react-helmet";
 import { graphql, Link } from "gatsby";
-import Layout from "../components/Layout";
-import Content, { HTMLContent } from "../components/Content";
+import Layout from "../components/layout-2-container";
+import ProfileTile from "../components/profile-tile";
+import PreviewCompatibleImage from "../components/preview-compatible-image";
+import Content, { HTMLContent } from "../components/content";
+import TagButtons from "../components/tag-buttons";
+import DispDate from "../components/disp-date";
+
+import "../styles/style.scss";
 
 export const BlogPostTemplate = ({
   content,
   contentComponent,
   date,
   description,
+  featuredimage,
   tags,
   title,
   helmet,
@@ -18,34 +24,57 @@ export const BlogPostTemplate = ({
   const PostContent = contentComponent || Content;
 
   return (
-    <section className="section">
-      {helmet || ""}
-      <div className="container content">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
-            <p>POST:{date}</p>
-            <p>{description}</p>
+    <div>
+      <section>
+        {helmet || ""}
+        <div className="box">
+          <div className="container content">
+            <div className="columns">
+              <div className="column is-10 is-offset-1">
+                <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
+                  {title}
+                </h1>
+                <div style={{ "margin-top": "1em", "margin-bottom": "1em" }}>
+                  <span>
+                    <p className="subtitle is-6">
+                      <DispDate date={date} />
+                      &nbsp;
+                      <TagButtons tags={tags} />
+                    </p>
+                  </span>
+                </div>
+                <PreviewCompatibleImage
+                  imageInfo={{
+                    image: featuredimage,
+                    alt: `featured image thumbnail for post ${title}`,
+                  }}
+                />
 
-            <PostContent content={content} />
-            {tags && tags.length ? (
-              <div style={{ marginTop: `4rem` }}>
-                <h4>Tags</h4>
-                <ul className="taglist">
-                  {tags.map((tag) => (
-                    <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                    </li>
-                  ))}
-                </ul>
+                <article
+                  className="message is-dark"
+                  style={{ "margin-top": "2em", "margin-bottom": "4em" }}
+                >
+                  <div className="message-body">
+                    <p className="content is-small">{description}</p>
+                  </div>
+                </article>
+
+                <PostContent content={content} />
+
+                <div style={{ "margin-top": "5em", "margin-bottom": "1em" }}>
+                  <span>
+                    <p className="content is-small">
+                      カテゴリー：
+                      <TagButtons tags={tags} />
+                    </p>
+                  </span>
+                </div>
               </div>
-            ) : null}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
@@ -61,24 +90,29 @@ const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data;
 
   return (
-    <Layout>
-      <BlogPostTemplate
-        content={post.html}
-        contentComponent={HTMLContent}
-        description={post.frontmatter.description}
-        helmet={
-          <Helmet titleTemplate="%s | Blog">
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta
-              name="description"
-              content={`${post.frontmatter.description}`}
-            />
-          </Helmet>
-        }
-        tags={post.frontmatter.tags}
-        title={post.frontmatter.title}
-      />
-    </Layout>
+    <Layout
+      mainContent={
+        <BlogPostTemplate
+          content={post.html}
+          contentComponent={HTMLContent}
+          description={post.frontmatter.description}
+          helmet={
+            <Helmet titleTemplate="%s | Blog">
+              <title>{`${post.frontmatter.title}`}</title>
+              <meta
+                name="description"
+                content={`${post.frontmatter.description}`}
+              />
+            </Helmet>
+          }
+          date={post.frontmatter.date}
+          tags={post.frontmatter.tags}
+          title={post.frontmatter.title}
+          featuredimage={post.frontmatter.featuredimage}
+        />
+      }
+      subContent={<ProfileTile />}
+    />
   );
 };
 
@@ -96,9 +130,16 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY年M月D日")
         title
         description
+        featuredimage {
+          childImageSharp {
+            fluid(quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         tags
       }
     }

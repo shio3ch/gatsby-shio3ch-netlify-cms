@@ -2,48 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
 
-import Layout from "../components/Layout";
-import Features from "../components/Features";
-import BlogRoll from "../components/BlogRoll";
+import Layout from "../components/layout-2-container";
+//import Features from "../components/Features";
+import BlogRoll from "../components/blog-roll";
+import ProfileTile from "../components/profile-tile";
 
-import './template.sass'
+import "../styles/style.scss";
 
-export const IndexPageTemplate = ({
-  title,
-  subheading,
-}) => (
+export const IndexPageTemplate = ({ title, subheading }) => (
   <div>
-    <section class="hero is-medium is-primary is-bold">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">{title}</h1>
-          <h2 class="subtitle">{subheading}</h2>
-        </div>
-      </div>
-    </section>
-    <section className="section section--gradient">
-      <div className="container">
-        <div className="section">
-          <div className="columns">
-            <div className="column is-10 is-offset-1">
-              <div className="content">
-                
-                <div className="column is-12">
-                  <h3 className="has-text-weight-semibold is-size-2">
-                    Latest
-                  </h3>
-                  <BlogRoll />
-                  <div className="column is-12 has-text-centered">
-                    <Link className="btn" to="/blog">
-                      Read more
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section>
+      <BlogRoll />
     </section>
   </div>
 );
@@ -57,12 +26,10 @@ const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark;
 
   return (
-    <Layout>
-      <IndexPageTemplate
-        title={frontmatter.title}
-        subheading={frontmatter.subheading}
-      />
-    </Layout>
+    <Layout
+      mainContent={IndexPageTemplate({title:frontmatter.title,subheading:frontmatter.subheading})}
+      subContent={<ProfileTile />}
+    />
   );
 };
 

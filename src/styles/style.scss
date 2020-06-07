@@ -1,4 +1,5 @@
 @import "~bulma/sass/utilities/initial-variables";
+
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 
@@ -63,3 +64,4 @@ $fullhd: 1152px; // default 1344px.
 }
 
 @import "~bulma";
+@import "~bulma-timeline";

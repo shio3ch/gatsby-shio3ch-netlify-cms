@@ -4,9 +4,11 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout-1-container";
 import Content, { HTMLContent } from "../components/content";
 
+import Timeline from "../components/timeline"
+
 import "../styles/style.scss";
 
-export const AboutPageTemplate = ({ title, content, contentComponent }) => {
+export const AboutPageTemplate = ({ title, timelineItems, content, contentComponent }) => {
   const PageContent = contentComponent || Content;
 
   return (
@@ -35,6 +37,16 @@ export const AboutPageTemplate = ({ title, content, contentComponent }) => {
           </span>
         </div>
       </section>
+
+      {/* timeline section */}
+      <section className="section is-even-section">
+        <div className="container has-text-centered">
+          <h2 className="title is-2">Work</h2>
+        </div>
+        <div className="container">
+          <Timeline timelineItems={timelineItems} />
+        </div>
+      </section>
       
     </div>
   );
@@ -42,6 +54,7 @@ export const AboutPageTemplate = ({ title, content, contentComponent }) => {
 
 AboutPageTemplate.propTypes = {
   title: PropTypes.string.isRequired,
+  timelineItems: PropTypes.any,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
 };
@@ -54,6 +67,7 @@ const AboutPage = ({ data }) => {
       <AboutPageTemplate
         contentComponent={HTMLContent}
         title={post.frontmatter.title}
+        timelineItems={post.frontmatter.timelineItems}
         content={post.html}
       />
     </Layout>
@@ -72,6 +86,15 @@ export const aboutPageQuery = graphql`
       html
       frontmatter {
         title
+        timelineItems {
+            period
+            job
+            skills
+            details
+            img
+            marker
+            markerIcon
+        }
       }
     }
   }

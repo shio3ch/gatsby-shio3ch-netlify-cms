@@ -63,5 +63,16 @@ $fullhd: 1152px; // default 1344px.
   }
 }
 
+.tag-list {
+  
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+
+  li {
+    display: inline-block;
+    padding-right: 0.5em;
+  }
+}
+
 @import "~bulma";
 @import "~bulma-timeline";

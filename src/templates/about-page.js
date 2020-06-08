@@ -4,11 +4,16 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout-1-container";
 import Content, { HTMLContent } from "../components/content";
 
-import Timeline from "../components/timeline"
+import Timeline from "../components/timeline";
 
 import "../styles/style.scss";
 
-export const AboutPageTemplate = ({ title, timelineItems, content, contentComponent }) => {
+export const AboutPageTemplate = ({
+  title,
+  timelineItems,
+  content,
+  contentComponent,
+}) => {
   const PageContent = contentComponent || Content;
 
   return (
@@ -43,11 +48,12 @@ export const AboutPageTemplate = ({ title, timelineItems, content, contentCompon
         <div className="container has-text-centered">
           <h2 className="title is-2">Work</h2>
         </div>
-        <div className="container">
-          <Timeline timelineItems={timelineItems} />
+        <div className="columns">
+          <div className="column is-three-fifths is-offset-one-fifth">
+            <Timeline timelineItems={timelineItems} />
+          </div>
         </div>
       </section>
-      
     </div>
   );
 };
@@ -87,13 +93,13 @@ export const aboutPageQuery = graphql`
       frontmatter {
         title
         timelineItems {
-            period
-            job
-            skills
-            details
-            img
-            marker
-            markerIcon
+          period
+          job
+          skills
+          details
+          img
+          marker
+          markerIcon
         }
       }
     }

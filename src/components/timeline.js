@@ -15,7 +15,7 @@ const Timeline = ({ timelineItems }) => {
 
   return (
     <div>
-      <div className="timeline is-centered">
+      <div className="timeline">
         <header className="timeline-header">
           <span className="tag is-medium is-dark">DEPLOY</span>
         </header>
@@ -29,7 +29,7 @@ const Timeline = ({ timelineItems }) => {
                 />
                 <div className="timeline-content">
                   <p className="heading">{node.period}</p>
-                  <div className="content is-small">
+                  <div className="content is-mideum">
                     <p className="subtitle is-4">{node.job}</p>
                     <Image
                       imageInfo={{
@@ -38,20 +38,19 @@ const Timeline = ({ timelineItems }) => {
                         imageStyle: {
                           width: "100%",
                           height: "240px",
-                          "object-fit": "contain",
                         },
                       }}
                     />
-                    <Details details={node.details} />
-                    <DispSkills skills={node.skills} />
                   </div>
+                  <Details details={node.details} />
+                  <DispSkills skills={node.skills} />
                 </div>
               </div>
             ))
           : null}
 
         <header className="timeline-header">
-          <span className="tag is-medium is-dark">2020年現在</span>
+          <span className="tag is-medium is-dark">現在</span>
         </header>
       </div>
     </div>
@@ -60,16 +59,20 @@ const Timeline = ({ timelineItems }) => {
 
 const DispSkills = ({ skills }) => {
   return (
-    <span>
-      {skills && skills.length
-        ? skills.map((skill) => (
-            <span class="tag is-light">
-              <FontAwesomeIcon icon={faTag} fixedWidth />
-              {skill}
-            </span>
-          ))
-        : null}
-    </span>
+    <div className="tag-list">
+      <ul>
+        {skills && skills.length
+          ? skills.map((skill, index) => (
+              <li key={index}>
+                <span className="tag is-light">
+                  <FontAwesomeIcon icon={faTag} fixedWidth />
+                  {skill}
+                </span>
+              </li>
+            ))
+          : null}
+      </ul>
+    </div>
   );
 };
 
@@ -110,8 +113,8 @@ const Details = ({ details }) => {
   const brTag = /\n/;
   return (
     <div>
-      {details.split(brTag).map((str) => {
-        return <p>{str}</p>
+      {details.split(brTag).map((str, index) => {
+        return <p key={index}>{str}</p>;
       })}
     </div>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import Footer from "./footer";
 import Navbar from "./navbar";
 import Seo from "./seo";
@@ -7,9 +6,7 @@ import Seo from "./seo";
 const Layout = ({ children }) => {
   return (
     <div>
-      <Helmet>
-        <Seo />
-      </Helmet>
+      <Seo />
       <div className="layout">
         <Navbar />
         <div>{children}</div>

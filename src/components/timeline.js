@@ -21,8 +21,8 @@ const Timeline = ({ timelineItems }) => {
         </header>
 
         {nodes && nodes.length
-          ? nodes.map((node) => (
-              <div className="timeline-item">
+          ? nodes.map((node, index) => (
+              <div className="timeline-item" key={index}>
                 <TimelineMarkerDiv
                   marker={node.marker}
                   markerIcon={node.markerIcon}
@@ -121,7 +121,17 @@ const Details = ({ details }) => {
 };
 
 Timeline.propTypes = {
-  timeline: PropTypes.any.isRequired,
+  timelineItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      period: PropTypes.string,
+      job: PropTypes.string.isRequired,
+      skills: PropTypes.arrayOf(PropTypes.string),
+      details: PropTypes.string,
+      img: PropTypes.string,
+      marker: PropTypes.string,
+      markerIcon: PropTypes.string,
+    }).isRequired
+  ).isRequired,
 };
 
 export default Timeline;

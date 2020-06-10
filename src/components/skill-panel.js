@@ -4,24 +4,10 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode, faDatabase, faCog } from "@fortawesome/free-solid-svg-icons";
 
-import { faStar as faSolidStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as faRegularStar } from "@fortawesome/free-regular-svg-icons";
-
 const SkillPanel = ({ skills }) => {
   return (
     <div className="skill-panel">
       <SkillSetBar skills={skills} />
-      {/* <ul>
-        {skills && skills.length
-          ? skills.map((skill, index) => (
-              <li key={index}>
-                {skill.name}
-                <DispStar level={skill.level} />
-                {skill.comment}
-              </li>
-            ))
-          : null}
-      </ul> */}
     </div>
   );
 };
@@ -29,7 +15,7 @@ const SkillPanel = ({ skills }) => {
 const SkillSetBar = ({ skills }) => {
   const CATEGORY_LANG = "lang";
   const CATEGORY_DB = "db";
-  const CATEGORY_OTHER = "other";
+  const CATEGORY_TOOL = "tool";
 
   const langCategories = [];
   const dbCategories = [];
@@ -43,7 +29,7 @@ const SkillSetBar = ({ skills }) => {
       case CATEGORY_DB:
         dbCategories.push(skills[i]);
         break;
-      case CATEGORY_OTHER:
+      case CATEGORY_TOOL:
         otherCategories.push(skills[i]);
     }
   }
@@ -69,15 +55,12 @@ const SkillSetBar = ({ skills }) => {
             <div className="skill-set-bar">
               {array && array.length
                 ? array.map((item, index) => (
-                    <div key={index} className="skill-set-bar-item" style={widthStyle(item.level)}>
-                      <div
-                        className="skill-set-bar-panel"
-                      >
-                        {item.name}
-                      </div>
-                      <div className="skill-set-bar-comment">
-                        <p className="content is-small">{item.comment}</p>
-                      </div>
+                    <div
+                      key={index}
+                      className="skill-set-bar-item"
+                      style={widthStyle(item.level)}
+                    >
+                      <div className="skill-set-bar-panel">{item.name}</div>
                     </div>
                   ))
                 : null}
@@ -97,40 +80,15 @@ const SkillSetBar = ({ skills }) => {
   );
 };
 
-// draft
-
-const DispStar = ({ level }) => {
-  const MIN_STAR_CNT = 1;
-  const MAX_STAR_CNT = 5;
-
-  let star;
-
-  if (level < MIN_STAR_CNT) {
-    star = MIN_STAR_CNT;
-  } else if (level > MAX_STAR_CNT) {
-    star = MAX_STAR_CNT;
-  } else {
-    star = level;
-  }
-
-  const stars = [];
-  for (let i = MIN_STAR_CNT; i <= MAX_STAR_CNT; i++) {
-    if (i > star) {
-      stars.push(<FontAwesomeIcon key={i} icon={faRegularStar} />);
-    } else {
-      stars.push(<FontAwesomeIcon key={i} icon={faSolidStar} />);
-    }
-  }
-
-  return <span>{stars}</span>;
-};
-
 SkillPanel.propTypes = {
-  skills: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    level: PropTypes.number.isRequired,
-    comment: PropTypes.string,
-  }).isRequired,
+  skills: PropTypes.arrayOf(
+    PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      level: PropTypes.number.isRequired,
+      comment: PropTypes.string,
+    }).isRequired
+  ).isRequired,
 };
 
 export default SkillPanel;

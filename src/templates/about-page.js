@@ -36,6 +36,9 @@ export const AboutPageTemplate = ({
       <section className="section is-even-section">
         <div className="container has-text-centered">
           <h2 className="title is-1 is-spaced">Skill</h2>
+          <p className="content">
+            私のスキルセットです。経験度合いで表現しています。<br/>
+          </p>
         </div>
         <div className="columns">
           <div className="column is-three-fifths is-offset-one-fifth">

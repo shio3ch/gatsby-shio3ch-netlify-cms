@@ -8,8 +8,7 @@ import Img from "gatsby-image"
  * @param {*} param0
  */
 const Image = ({ imageInfo }) => {
-  const imageStyle = { borderRadius: "5px" }
-  const { fileName = "", alt = "" } = imageInfo
+  const { fileName = "", alt = "" , imageStyle = {borderRadius: "5px"}} = imageInfo
 
   return (
     <StaticQuery

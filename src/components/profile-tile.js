@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "gatsby";
 
 import Image from "./image";
@@ -15,11 +15,9 @@ const ProfileTile = () => {
     <div className="profile-tile">
       <div className="tile box">
         <div className="container has-text-centered">
-          <div style={{ "margin-top": "2em", "margin-bottom": "2em" }}>
-            <Link to="/about">
-              <Image imageInfo={{ fileName: "shio3ch_icon_21.png" }} />
-            </Link>
-          </div>
+          <Link to="/about">
+            <Image imageInfo={{ fileName: "shio3ch_icon_21.png" }} />
+          </Link>
           <Link className="profile-tile-link" to="/about">
             <p className="title is-4">{siteMetadata.profile.name}</p>
           </Link>

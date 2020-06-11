@@ -5,7 +5,7 @@ import PreviewCompatibleImage from "./preview-compatible-image";
 import TagButtons from "./tag-buttons";
 import DispDate from "./disp-date";
 
-class BlogRoll extends React.Component {
+class BlogRollPanels extends React.Component {
   render() {
     const { data } = this.props;
     const { edges: posts } = data.allMarkdownRemark;
@@ -16,39 +16,42 @@ class BlogRoll extends React.Component {
           posts.map(({ node: post }) => (
             <div className="box blog-roll" key={post.id}>
               <article>
-                <Link to={post.fields.slug}>
-                  <div className="columns">
-                    <div className="column">
-                      {post.frontmatter.featuredimage ? (
-                        <div className="featured-thumbnail">
+                <div className="columns">
+                  <div className="column">
+                    {post.frontmatter.featuredimage ? (
+                      <div className="featured-thumbnail">
+                        <Link to={post.fields.slug}>
                           <PreviewCompatibleImage
                             imageInfo={{
                               image: post.frontmatter.featuredimage,
                               alt: `featured image thumbnail for post ${post.frontmatter.title}`,
                             }}
                           />
-                        </div>
-                      ) : null}
-                    </div>
-                    <div className="column">
-                      <p className="title has-text-dark is-size-4 blog-roll-title">
-                        {post.frontmatter.title}
-                      </p>
-                      <p className="content is-small has-text-dark">
-                        {post.excerpt}
-                        <br />
-                        <br />
-                      </p>
-
-                        <span className="subtitle is-6">
-                          <DispDate date={post.frontmatter.date} />
-                          &nbsp;
-                          <TagButtons tags={post.frontmatter.tags} />
-                        </span>
-              
-                    </div>
+                        </Link>
+                      </div>
+                    ) : null}
                   </div>
-                </Link>
+                  <div className="column">
+                  <Link to={post.fields.slug}>
+                    <p className="title has-text-dark is-size-4 blog-roll-title">
+                      
+                        {post.frontmatter.title}
+                      
+                    </p>
+                    </Link>
+                    <p className="content is-small has-text-dark">
+                      {post.excerpt}
+                      <br />
+                      <br />
+                    </p>
+
+                    <span className="subtitle is-6">
+                      <DispDate date={post.frontmatter.date} />
+                      &nbsp;
+                      <TagButtons tags={post.frontmatter.tags} />
+                    </span>
+                  </div>
+                </div>
               </article>
             </div>
           ))}
@@ -57,7 +60,7 @@ class BlogRoll extends React.Component {
   }
 }
 
-BlogRoll.propTypes = {
+BlogRollPanels.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
       edges: PropTypes.array,
@@ -65,7 +68,7 @@ BlogRoll.propTypes = {
   }),
 };
 
-export default () => (
+const BlogRoll = () => (
   <StaticQuery
     query={graphql`
       query BlogRollQuery {
@@ -99,6 +102,8 @@ export default () => (
         }
       }
     `}
-    render={(data, count) => <BlogRoll data={data} count={count} />}
+    render={(data, count) => <BlogRollPanels data={data} count={count} />}
   />
 );
+
+export default BlogRoll;

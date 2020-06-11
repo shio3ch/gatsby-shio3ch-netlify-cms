@@ -31,16 +31,21 @@ $fullhd: 1152px; // default 1344px.
 .blog-roll {
   &:hover {
     box-shadow: 0 0 3px 2px $grey-light;
+  }
+}
 
-    .blog-roll-title {
-      text-decoration: underline;
-    }
+.blog-roll-title {
+  // color: $black;
+  &:hover {
+    text-decoration: underline;
   }
 }
 
 .tag-button {
-  &:hover {
-    .tag {
+  .tag {
+    margin-right: 0.4em;
+
+    &:hover {
       box-shadow: 0 0 0 1px $black;
     }
   }
@@ -118,9 +123,7 @@ $fullhd: 1152px; // default 1344px.
     .skill-set-bar-panel {
       text-align: center;
     }
-      
-    }
-
+  }
 }
 
 @import "~bulma";

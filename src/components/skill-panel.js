@@ -91,4 +91,15 @@ SkillPanel.propTypes = {
   ).isRequired,
 };
 
+SkillSetBar.propTypes = {
+  skills: PropTypes.arrayOf(
+    PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      level: PropTypes.number.isRequired,
+      comment: PropTypes.string,
+    }).isRequired
+  ).isRequired,
+}
+
 export default SkillPanel;
